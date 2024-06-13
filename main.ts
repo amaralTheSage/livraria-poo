@@ -1,4 +1,6 @@
 import Prompt from "prompt-sync";
+import { Membro } from "./classes/Membro";
+import fs from "fs";
 
 const key = Prompt();
 
@@ -26,6 +28,10 @@ while (true) {
 
       let opcao: number = +key("- ");
 
+      if (opcao == 0) {
+        break;
+      }
+
       switch (opcao) {
         case 1:
           console.log("teste");
@@ -35,8 +41,6 @@ while (true) {
           break;
         case 3:
           console.log("teste");
-          break;
-        case 0:
           break;
       }
     }
@@ -55,17 +59,44 @@ while (true) {
 
       let opcao: number = +key("- ");
 
+      if (opcao == 0) {
+        break;
+      }
+
       switch (opcao) {
         case 1:
-          console.log("teste");
+          let nome: string = key("Nome: ");
+          let matricula: string = key("Matrícula: ");
+          let endereco: string = key("Endereço: ");
+          let telefone: string = key("Telefone: ");
+
+          const membro = new Membro(nome, matricula, endereco, telefone);
+
+          membro.adicionar();
+
           break;
+
         case 2:
-          console.log("teste");
+          if (fs.existsSync("data/membros.txt")) {
+            const membros = fs
+              .readFileSync("data/membros.txt", "utf8")
+              .split(", ");
+
+            console.log(membros);
+          } else {
+            console.log("Não há nenhum registro.");
+          }
+
           break;
+
         case 3:
-          console.log("teste");
-          break;
-        case 0:
+          let m: string = key("Matricula: ");
+          const membros = fs
+            .readFileSync("data/membros.txt", "utf8")
+            .split(", ");
+
+          console.log(membros);
+
           break;
       }
     }
@@ -75,14 +106,17 @@ while (true) {
   else if (menuSelecionado == 3) {
     while (true) {
       console.log("+---------------------------------------+");
-      console.log("| 1. Adicionar novo empréstimos          |");
-      console.log("| 2. Listar empréstimos                  |");
-      console.log("| 3. Atualizar um empréstimos            |");
-      console.log("| 4. Remover empréstimos                 |");
+      console.log("| 1. Adicionar novo empréstimo           |");
+      console.log("| 2. Fazer uma devolução                 |");
+      console.log("| 3. Listar empréstimos não devolvidos   |");
       console.log("| 0. Sair                                |");
       console.log("+---------------------------------------+");
 
       let opcao: number = +key("- ");
+
+      if (opcao == 0) {
+        break;
+      }
 
       switch (opcao) {
         case 1:
@@ -93,8 +127,6 @@ while (true) {
           break;
         case 3:
           console.log("teste");
-          break;
-        case 0:
           break;
       }
     }

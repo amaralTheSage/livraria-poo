@@ -10,4 +10,9 @@ export class Livro {
     this._ISBN = ISBN;
     this._ano = ano;
   }
+
+  public adicionar(): void {}
+  public atualizar(): void {}
+  public listar(): void {}
+  public deletar(): void {}
 }
