@@ -1,49 +1,115 @@
-export class Livro {
-  protected _titulo: string = "";
-  protected _autor: string = "";
-  protected _ISBN: string = "0000000000000"; //'000-0-00-000000-0'
-  protected _ano: number = 0;
+import Prompt from "prompt-sync";
 
-  constructor(titulo: string, autor: string, ISBN: string, ano: number) {
-    this._titulo = titulo;
-    this._autor = autor;
-    this._ISBN = ISBN;
-    this._ano = ano;
+const key = Prompt();
+
+while (true) {
+  console.log("+----------------------+");
+  console.log("| Administrar:         |");
+  console.log("| 1. Livros            |");
+  console.log("| 2. Membros           |");
+  console.log("| 3. Empréstimos       |");
+  console.log("| 0. Sair              |");
+  console.log("+----------------------+");
+
+  let menuSelecionado: number = +key("- ");
+
+  // LIVROS
+  if (menuSelecionado == 1) {
+    while (true) {
+      console.log("+---------------------------------------+");
+      console.log("| 1. Adicionar novo livro               |");
+      console.log("| 2. Listar livros                      |");
+      console.log("| 3. Atualizar um livro                 |");
+      console.log("| 4. Remover livro                      |");
+      console.log("| 0. Sair                               |");
+      console.log("+---------------------------------------+");
+
+      let opcao: number = +key("- ");
+
+      switch (opcao) {
+        case 1:
+          console.log("teste");
+          break;
+        case 2:
+          console.log("teste");
+          break;
+        case 3:
+          console.log("teste");
+          break;
+        case 0:
+          break;
+      }
+    }
+  }
+
+  //MEMBROS
+  else if (menuSelecionado == 2) {
+    while (true) {
+      console.log("+---------------------------------------+");
+      console.log("| 1. Adicionar novo membro               |");
+      console.log("| 2. Listar membros                      |");
+      console.log("| 3. Atualizar um membro                 |");
+      console.log("| 4. Remover membro                      |");
+      console.log("| 0. Sair                                |");
+      console.log("+---------------------------------------+");
+
+      let opcao: number = +key("- ");
+
+      switch (opcao) {
+        case 1:
+          console.log("teste");
+          break;
+        case 2:
+          console.log("teste");
+          break;
+        case 3:
+          console.log("teste");
+          break;
+        case 0:
+          break;
+      }
+    }
+  }
+
+  //EMPRESTIMOS
+  else if (menuSelecionado == 3) {
+    while (true) {
+      console.log("+---------------------------------------+");
+      console.log("| 1. Adicionar novo empréstimos          |");
+      console.log("| 2. Listar empréstimos                  |");
+      console.log("| 3. Atualizar um empréstimos            |");
+      console.log("| 4. Remover empréstimos                 |");
+      console.log("| 0. Sair                                |");
+      console.log("+---------------------------------------+");
+
+      let opcao: number = +key("- ");
+
+      switch (opcao) {
+        case 1:
+          console.log("teste");
+          break;
+        case 2:
+          console.log("teste");
+          break;
+        case 3:
+          console.log("teste");
+          break;
+        case 0:
+          break;
+      }
+    }
+    //SAIR
+  } else if (menuSelecionado == 0) {
+    break;
+  } else {
+    console.log("Selecione uma das opções pelos números.");
   }
 }
 
-export class Pessoa {
-  protected _nome = "";
-  protected _matricula = "";
-  protected _endereco = "";
-  protected _telefone = "";
-}
-
-export class Membro extends Pessoa {
-  protected _matricula = "";
-
-  constructor(
-    nome: string,
-    matricula: string,
-    endereco: string,
-    telefone: string
-  ) {
-    super();
-    this._nome = nome;
-    this._matricula = matricula;
-    this._endereco = endereco;
-    this._telefone = telefone;
-  }
-}
-
-export class Emprestimo {
-  protected _dataEmprestimo = "";
-  protected _dataDevolucao = "";
-
-  constructor(dataEmprestimo: string, dataDevolucao: string) {
-    this._dataEmprestimo = dataEmprestimo;
-    this._dataDevolucao = dataDevolucao;
-  }
-
-  
-}
+// console.log("+---------------------------------------+");
+// console.log("| 1. Adicionar novo livro               |");
+// console.log("| 2. Listar livros                      |");
+// console.log("| 3. Atualizar um livro                 |");
+// console.log("| 4. Remover Livro                      |");
+// console.log("| 0. Sair                               |");
+// console.log("+---------------------------------------+");
