@@ -1,0 +1,12 @@
+{
+  "dependencies": {
+    "@types/prompt-sync": "^4.2.3",
+    "jest": "^29.7.0",
+    "jester": "^0.2.3",
+    "prompt-sync": "^4.2.0",
+    "test-jest": "^1.0.1",
+    "ts-nest": "^0.0.9",
+    "ts-node": "^10.9.2",
+    "typescript": "^5.4.5"
+  }
+}
