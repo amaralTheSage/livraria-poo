@@ -1,6 +1,7 @@
 import Prompt from "prompt-sync";
 import { Membro } from "./classes/Membro";
 import fs from "fs";
+import { Livro } from "./classes/Livro";
 
 const key = Prompt();
 
@@ -34,13 +35,20 @@ while (true) {
 
       switch (opcao) {
         case 1:
-          console.log("teste");
+          let titulo: string = key("Título: ");
+          let autor: string = key("Autor: ");
+          let ISBN: string = key("ISBN: ");
+          let ano: number = +key("Ano: ");
+
+          const livro = new Livro(titulo, autor, ISBN, ano);
+
+          livro.adicionar();
           break;
         case 2:
-          console.log("teste");
+          Livro.prototype.listar();
           break;
         case 3:
-          console.log("teste");
+          Livro.prototype.atualizar();
           break;
       }
     }
