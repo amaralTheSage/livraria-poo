@@ -6,4 +6,6 @@ export class Emprestimo {
     this._dataEmprestimo = dataEmprestimo;
     this._dataDevolucao = dataDevolucao;
   }
+
+  
 }

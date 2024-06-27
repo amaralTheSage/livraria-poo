@@ -1,6 +1,5 @@
 import fs from "fs";
 import Prompt from "prompt-sync";
-import { Pessoa } from "./Pessoa";
 
 
 export class Livro {
@@ -75,5 +74,20 @@ export class Livro {
   
   }
 
-  public deletar(): void {}
+  public deletar(): void {
+    if (fs.existsSync("./data/livros.json")){
+      let key = Prompt();
+      let ISBN = key("Digite o ISBN do livro que deseja deletar: ");
+      const data = fs.readFileSync("./data/livros.json", "utf-8");
+      let livros = JSON.parse(data);
+      let livro = livros.find((livro: any) => livro.ISBN == ISBN);
+      if(livro){
+        let index = livros.indexOf(livro);
+        livros.splice(index, 1);
+        fs.writeFileSync("./data/livros.json", JSON.stringify(livros, null, 2))
+      } else {
+        console.log("Livro não encontrado!")
+      }
+    }
+  }
 }

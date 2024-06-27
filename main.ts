@@ -50,6 +50,9 @@ while (true) {
         case 3:
           Livro.prototype.atualizar();
           break;
+        case 4:
+          Livro.prototype.deletar();
+          break;
       }
     }
   }

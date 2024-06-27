@@ -1,14 +1,8 @@
 [
   {
     "titulo": "testando",
-    "autor": "testando",
-    "ISBN": "22222",
-    "ano": "1984"
-  },
-  {
-    "titulo": "124141",
-    "autor": "124141",
-    "ISBN": "1313",
-    "ano": 12314
+    "autor": "testando da silva",
+    "ISBN": "202020",
+    "ano": "1980"
   }
 ]
