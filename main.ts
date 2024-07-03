@@ -2,6 +2,7 @@ import Prompt from "prompt-sync";
 import { Membro } from "./classes/Membro";
 import fs from "fs";
 import { Livro } from "./classes/Livro";
+import { Emprestimo } from "./classes/Emprestimo";
 
 const key = Prompt();
 
@@ -77,38 +78,45 @@ while (true) {
       switch (opcao) {
         case 1:
           let nome: string = key("Nome: ");
-          let matricula: string = key("Matrícula: ");
           let endereco: string = key("Endereço: ");
-          let telefone: string = key("Telefone: ");
+          let CPF: string = key("CPF: ");          
+          let telefone: number = +key("Telefone: ");
 
-          const membro = new Membro(nome, matricula, endereco, telefone);
+          const membro = new Membro(nome, endereco, CPF, telefone);
 
           membro.adicionar();
 
           break;
 
-        case 2:
-          if (fs.existsSync("data/membros.txt")) {
-            const membros = fs
-              .readFileSync("data/membros.txt", "utf8")
-              .split(", ");
-
-            console.log(membros);
-          } else {
-            console.log("Não há nenhum registro.");
-          }
-
+         case 2:
+          Membro.prototype.listar();
           break;
+        //   if (fs.existsSync("data/membros.txt")) {
+        //     const membros = fs
+        //       .readFileSync("data/membros.txt", "utf8")
+        //       .split(", ");
+
+        //     console.log(membros);
+        //   } else {
+        //     console.log("Não há nenhum registro.");
+        //   }
+
+        //   break;
 
         case 3:
-          let m: string = key("Matricula: ");
-          const membros = fs
-            .readFileSync("data/membros.txt", "utf8")
-            .split(", ");
-
-          console.log(membros);
-
+          Membro.prototype.atualizar();
           break;
+          // let m: string = key("CPF: ");
+          // const membros = fs
+          //   .readFileSync("data/membros.txt", "utf8")
+          //   .split(", ");
+
+          // console.log(membros);
+
+          // break;
+          case 4:
+            Membro.prototype.deletar();
+            break;
       }
     }
   }
@@ -131,14 +139,12 @@ while (true) {
 
       switch (opcao) {
         case 1:
-          console.log("teste");
+          Emprestimo.prototype.adicionar();
           break;
         case 2:
-          console.log("teste");
-          break;
+          Emprestimo.prototype.devolver
         case 3:
-          console.log("teste");
-          break;
+         Emprestimo.prototype.listar
       }
     }
     //SAIR
