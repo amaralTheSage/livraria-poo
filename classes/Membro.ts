@@ -1,220 +1,95 @@
 import fs from "fs";
 import Prompt from "prompt-sync";
 
+const prompt = Prompt();
 
 export class Membro {
-  protected _nome: string;
-  protected _endereco: string = "";
-  protected _CPF: string = "0000000000000"; 
-  protected _telefone: number = 0;
+  private _nome: string;
+  private _endereco: string;
+  private _cpf: string;
+  private _telefone: string;
 
-  constructor(nome: string, endereco: string, CPF: string, telefone: number) {
+  constructor(nome: string, endereco: string, cpf: string, telefone: string) {
     this._nome = nome;
     this._endereco = endereco;
-    this._CPF = CPF;
+    this._cpf = cpf;
     this._telefone = telefone;
+  }
+
+  get cpf(): string {
+    return this._cpf;
   }
 
   public adicionar(): void {
     const membroData = {
       nome: this._nome,
       endereco: this._endereco,
-      CPF: this._CPF,
+      cpf: this._cpf,
       telefone: this._telefone,
     };
 
-    let membros = []
+    let membros = [];
     if (fs.existsSync("./data/membros.json")) {
       const data = fs.readFileSync("./data/membros.json", "utf-8");
       membros = JSON.parse(data);
     }
     membros.push(membroData);
 
-    fs.writeFileSync("./data/membros.json", JSON.stringify(membros, null, 2))
-
+    fs.writeFileSync("./data/membros.json", JSON.stringify(membros, null, 2));
+    console.log("Membro adicionado com sucesso!");
   }
 
-  public atualizar(): void{
-    let key = Prompt();
-    let CPF = key("Digite o CPF do membro que deseja atualizar: ");
-
+  public atualizar(): void {
+    const cpf = prompt("Digite o CPF do membro que deseja atualizar: ");
 
     if (fs.existsSync("./data/membros.json")) {
       const data = fs.readFileSync("./data/membros.json", "utf-8");
       const membros = JSON.parse(data);
-      let membro = membros.find((membro: any) => membro.CPF == CPF);
+      let membro = membros.find((membro: any) => membro.cpf === cpf);
 
-      if(membro){
-        let nome = key("Nome: ");
-        let endereco = key("endereco: ");
-        let CPF = key("CPF: ");
-        let telefone = key("telefone: ");
+      if (membro) {
+        membro.nome = prompt("Nome: ");
+        membro.endereco = prompt("Endereço: ");
+        membro.cpf = prompt("CPF: ");
+        membro.telefone = prompt("Telefone: ");
 
-        membro.nome = nome;
-        membro.endereco = endereco;
-        membro.CPF = CPF;
-        membro.telefone = telefone;
-
-        fs.writeFileSync("./data/membros.json", JSON.stringify(membros, null, 2))
+        fs.writeFileSync("./data/membros.json", JSON.stringify(membros, null, 2));
+        console.log("Membro atualizado com sucesso!");
       } else {
-        console.log("membro não encontrado!")
+        console.log("Membro não encontrado!");
       }
+    } else {
+      console.log("Arquivo de membros não encontrado!");
     }
-    
   }
 
   public listar(): void {
     if (fs.existsSync("./data/membros.json")) {
       const data = fs.readFileSync("./data/membros.json", "utf-8");
       const membros = JSON.parse(data);
-      console.table(membros)
+      console.table(membros);
     } else {
-      console.log("Arquivo não encontrado!")
+      console.log("Arquivo de membros não encontrado!");
     }
-  
   }
 
   public deletar(): void {
-    if (fs.existsSync("./data/membros.json")){
-      let key = Prompt();
-      let CPF = key("Digite o CPF do membro que deseja deletar: ");
+    if (fs.existsSync("./data/membros.json")) {
+      const cpf = prompt("Digite o CPF do membro que deseja deletar: ");
       const data = fs.readFileSync("./data/membros.json", "utf-8");
       let membros = JSON.parse(data);
-      let membro = membros.find((membro: any) => membro.CPF == CPF);
-      if(membro){
+      let membro = membros.find((membro: any) => membro.cpf === cpf);
+
+      if (membro) {
         let index = membros.indexOf(membro);
         membros.splice(index, 1);
-        fs.writeFileSync("./data/membros.json", JSON.stringify(membros, null, 2))
+        fs.writeFileSync("./data/membros.json", JSON.stringify(membros, null, 2));
+        console.log("Membro deletado com sucesso!");
       } else {
-        console.log("membro não encontrado!")
+        console.log("Membro não encontrado!");
       }
+    } else {
+      console.log("Arquivo de membros não encontrado!");
     }
   }
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-// import { Pessoa } from "./Pessoa";
-// import fs from "fs";
-// import Prompt from "prompt-sync";
-
-// export class Membro extends Pessoa {
-//   protected _CPF = "";
-
-//   constructor(
-//     nome: string = "",
-//     CPF: string = "",
-//     endereco: string = "",
-//     CPF: string = ""
-//   ) {
-//     super();
-//     this._nome = nome;
-//     this._CPF = CPF;
-//     this._endereco = endereco;
-//     this._CPF = CPF;
-//   }
-
-//   public adicionar(): void {   const membroData = {
-//     nome: this._nome,
-//     endereco: this._endereco,
-//     CPF: this._CPF,
-//     CPF: this._CPF,
-//   };
-
-//   let membros = []
-//   if (fs.existsSync("./data/membros.json")) {
-//     const data = fs.readFileSync("./data/membros.json", "utf-8");
-//     membros = JSON.parse(data);
-//   }
-//   membros.push(membroData);
-
-//   fs.writeFileSync("./data/membros.json", JSON.stringify(membros, null, 2))
-
-//   }
-
-//   public atualizar(): void {
-//     let key = Prompt();
-//     let CPF = key("Digite a CPF do membro que deseja atualizar: ");
-
-
-//     if (fs.existsSync("./data/membros.json")) {
-//       const data = fs.readFileSync("./data/membros.json", "utf-8");
-//       const membros = JSON.parse(data);
-//       let membro = membros.find((membro: any) => membro.CPF == CPF);
-
-//       if(membro){
-//         let nome = key("Título: ");
-//         let endereco = key("endereco: ");
-//         let CPF = key("CPF: ");
-//         let CPF = key("CPF: ");
-
-//         membro.nome = nome;
-//         membro.endereco = endereco;
-//         membro.CPF = CPF;
-//         membro.CPF = CPF;
-
-//         fs.writeFileSync("./data/membros.json", JSON.stringify(membros, null, 2))
-//       } else {
-//         console.log("membro não encontrado!")
-//       }
-//     }
-//     }
-
-//     public listar(): void {
-//       if (fs.existsSync("./data/membros.json")) {
-//         const data = fs.readFileSync("./data/membros.json", "utf-8");
-//         const membros = JSON.parse(data);
-//         console.table(membros)
-//       } else {
-//         console.log("Membro não encontrado!")
-//       }
-    
-//     }
-
-//   public deletar(): void {
-//     if (fs.existsSync("./data/membros.json")){
-//       let key = Prompt();
-//       let CPF = key("Digite o CPF do membro que deseja deletar: ");
-//       const data = fs.readFileSync("./data/membros.json", "utf-8");
-//       let membros = JSON.parse(data);
-//       let membro = membros.find((membro: any) => membro.CPF == CPF);
-//       if(membro){
-//         let index = membros.indexOf(membro);
-//         membros.splice(index, 1);
-//         fs.writeFileSync("./data/membros.json", JSON.stringify(membros, null, 2))
-//       } else {
-//         console.log("membro não encontrado!")
-//       }
-//     }
-//   }
-
-  
-//   // public alugarmembro(
-//   //   CPF?: string,
-//   //   nome: string,
-//   //   dataEmprestimo: string,
-//   //   dataDevolucao: string
-//   // ): void {}
-
-  
-// }
-

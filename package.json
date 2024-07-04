@@ -12,7 +12,14 @@
     "typescript": "^5.4.5"
   },
   "devDependencies": {
+    "@jest/globals": "^29.7.0",
+    "@types/jest": "^29.5.12",
     "@types/node": "^20.14.2",
-    "fs": "^0.0.1-security"
-  }
+    "fs": "^0.0.1-security",
+    "ts-jest": "^29.1.5"
+  },
+  "scripts": {
+  "test": "jest"
+}
+
 }

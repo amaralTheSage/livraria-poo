@@ -42,31 +42,33 @@ while (true) {
           let ano: number = +key("Ano: ");
 
           const livro = new Livro(titulo, autor, ISBN, ano);
-
           livro.adicionar();
           break;
         case 2:
-          Livro.prototype.listar();
+          const livroList = new Livro("", "", "", 0);
+          livroList.listar();
           break;
         case 3:
-          Livro.prototype.atualizar();
+          const livroUpdate = new Livro("", "", "", 0);
+          livroUpdate.atualizar();
           break;
         case 4:
-          Livro.prototype.deletar();
+          const livroDelete = new Livro("", "", "", 0);
+          livroDelete.deletar();
           break;
       }
     }
   }
 
-  //MEMBROS
+  // MEMBROS
   else if (menuSelecionado == 2) {
     while (true) {
       console.log("+---------------------------------------+");
-      console.log("| 1. Adicionar novo membro               |");
-      console.log("| 2. Listar membros                      |");
-      console.log("| 3. Atualizar um membro                 |");
-      console.log("| 4. Remover membro                      |");
-      console.log("| 0. Sair                                |");
+      console.log("| 1. Adicionar novo membro              |");
+      console.log("| 2. Listar membros                     |");
+      console.log("| 3. Atualizar um membro                |");
+      console.log("| 4. Remover membro                     |");
+      console.log("| 0. Sair                               |");
       console.log("+---------------------------------------+");
 
       let opcao: number = +key("- ");
@@ -79,94 +81,78 @@ while (true) {
         case 1:
           let nome: string = key("Nome: ");
           let endereco: string = key("Endereço: ");
-          let CPF: string = key("CPF: ");          
-          let telefone: number = +key("Telefone: ");
+          let CPF: string = key("CPF: ");
+          let telefone: string = key("Telefone: ");
 
           const membro = new Membro(nome, endereco, CPF, telefone);
-
           membro.adicionar();
-
           break;
-
-         case 2:
-          Membro.prototype.listar();
+        case 2:
+          const membroList = new Membro("", "", "", "");
+          membroList.listar();
           break;
-        //   if (fs.existsSync("data/membros.txt")) {
-        //     const membros = fs
-        //       .readFileSync("data/membros.txt", "utf8")
-        //       .split(", ");
-
-        //     console.log(membros);
-        //   } else {
-        //     console.log("Não há nenhum registro.");
-        //   }
-
-        //   break;
-
         case 3:
-          Membro.prototype.atualizar();
+          const membroUpdate = new Membro("", "", "", "");
+          membroUpdate.atualizar();
           break;
-          // let m: string = key("CPF: ");
-          // const membros = fs
-          //   .readFileSync("data/membros.txt", "utf8")
-          //   .split(", ");
-
-          // console.log(membros);
-
-          // break;
-          case 4:
-            Membro.prototype.deletar();
-            break;
+        case 4:
+          const membroDelete = new Membro("", "", "", "");
+          membroDelete.deletar();
+          break;
       }
     }
   }
 
-  //EMPRESTIMOS
+  // EMPRESTIMOS
   else if (menuSelecionado == 3) {
     while (true) {
       console.log("+---------------------------------------+");
-      console.log("| 1. Adicionar novo empréstimo           |");
-      console.log("| 2. Fazer uma devolução                 |");
-      console.log("| 3. Listar empréstimos não devolvidos   |");
-      console.log("| 0. Sair                                |");
+      console.log("| 1. Adicionar novo empréstimo          |");
+      console.log("| 2. Fazer uma devolução                |");
+      console.log("| 3. Listar empréstimos não devolvidos  |");
+      console.log("| 0. Sair                               |");
       console.log("+---------------------------------------+");
-
+  
       let opcao: number = +key("- ");
-
+  
       if (opcao == 0) {
         break;
       }
-
+  
       switch (opcao) {
         case 1:
-          let cpfMembro: string = key("CPF do Membro la ele: ");
+          let cpfMembro = key("CPF do Membro: ");
+          let ISBN_livro = key("ISBN do Livro: ");
+          let dataEmprestimo = key("Data do Empréstimo: ");
+          let dataDevolucao = key("Data de Devolução: ");
 
-          let ISBN_livro: string = key("ISBN do Livrer: ");
-          let dataEmprestimo: string = key("Data do Emprestimer: ");          
-          let dataDevolucao: string = key("Data de Devolutioner: ");
+          const membro = new Membro("Nome do Membro", "Endereço do Membro", cpfMembro, "Telefone do Membro");
+          const livro = new Livro("Título do Livro", "Autor do Livro", ISBN_livro, 2023);
 
-          const emprestimo = new Emprestimo(cpfMembro, ISBN_livro, dataEmprestimo, dataDevolucao);
-
+          const emprestimo = new Emprestimo(membro, livro, dataEmprestimo, dataDevolucao);
           emprestimo.adicionar();
           break;
+
         case 2:
-          Emprestimo.prototype.devolver()
+          const emprestimoDevolucao = new Emprestimo(new Membro("", "", "", ""), new Livro("", "", "", 0), "", "");
+          emprestimoDevolucao.devolver();
+          break;
+
         case 3:
-         Emprestimo.prototype.listar()
-      }
+          const emprestimoList = new Emprestimo(new Membro("", "", "", ""), new Livro("", "", "", 0), "", "");
+          emprestimoList.listar();
+          break;
+          
+        }
     }
-    //SAIR
-  } else if (menuSelecionado == 0) {
+  }
+  
+  
+
+  // SAIR
+  else if (menuSelecionado == 0) {
     break;
   } else {
     console.log("Selecione uma das opções pelos números.");
   }
 }
-
-// console.log("+---------------------------------------+");
-// console.log("| 1. Adicionar novo livro               |");
-// console.log("| 2. Listar livros                      |");
-// console.log("| 3. Atualizar um livro                 |");
-// console.log("| 4. Remover Livro                      |");
-// console.log("| 0. Sair                               |");
-// console.log("+---------------------------------------+");
