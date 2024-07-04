@@ -1,3 +1,8 @@
 [
-    
+  {
+    "cpfMembro": "89089089099",
+    "ISBN_livro": "202021",
+    "dataEmprestimo": "20/10/2010",
+    "dataDevolucao": "20/10/2020"
+  }
 ]

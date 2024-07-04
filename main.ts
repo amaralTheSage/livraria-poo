@@ -139,12 +139,20 @@ while (true) {
 
       switch (opcao) {
         case 1:
-          Emprestimo.prototype.adicionar();
+          let cpfMembro: string = key("CPF do Membro la ele: ");
+
+          let ISBN_livro: string = key("ISBN do Livrer: ");
+          let dataEmprestimo: string = key("Data do Emprestimer: ");          
+          let dataDevolucao: string = key("Data de Devolutioner: ");
+
+          const emprestimo = new Emprestimo(cpfMembro, ISBN_livro, dataEmprestimo, dataDevolucao);
+
+          emprestimo.adicionar();
           break;
         case 2:
-          Emprestimo.prototype.devolver
+          Emprestimo.prototype.devolver()
         case 3:
-         Emprestimo.prototype.listar
+         Emprestimo.prototype.listar()
       }
     }
     //SAIR

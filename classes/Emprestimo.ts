@@ -4,22 +4,24 @@ import { Membro } from "./Membro";
 import { Livro } from "./Livro";
 
 export class Emprestimo {
-  protected _membro: Membro;
-  protected _livro: Livro;
+  protected _cpfMembro: string;
+  protected _ISBN_livro: string;
   protected _dataEmprestimo: string;
   protected _dataDevolucao: string;
 
-  constructor(membro: Membro, livro: Livro, dataEmprestimo: string, dataDevolucao: string) {
-    this._membro = membro;
-    this._livro = livro;
+  constructor(cpfMembro: string, ISBN_livro: string, dataEmprestimo: string, dataDevolucao: string) {
+    this._cpfMembro = cpfMembro;
+    this._ISBN_livro = ISBN_livro;
     this._dataEmprestimo = dataEmprestimo;
     this._dataDevolucao = dataDevolucao;
   }
 
   public adicionar(): void {
+''
+
     const emprestimoData = {
-      membro: this._membro,
-      livro: this._livro,
+      cpfMembro: this._cpfMembro,
+      ISBN_livro: this._ISBN_livro,
       dataEmprestimo: this._dataEmprestimo,
       dataDevolucao: this._dataDevolucao,
     };
@@ -38,6 +40,7 @@ export class Emprestimo {
     if (fs.existsSync("./data/emprestimos.json")) {
       const data = fs.readFileSync("./data/emprestimos.json", "utf-8");
       const emprestimos = JSON.parse(data);
+
       console.table(emprestimos);
     } else {
       console.log("Arquivo de empréstimos não encontrado!");
@@ -53,7 +56,7 @@ export class Emprestimo {
       const data = fs.readFileSync("./data/emprestimos.json", "utf-8");
       let emprestimos = JSON.parse(data);
       let emprestimo = emprestimos.find(
-        (e: any) => e.membro.CPF === CPF && e.livro.ISBN === ISBN
+        (e: Emprestimo) => e._cpfMembro === CPF && e._ISBN_livro === ISBN
       );
 
       if (emprestimo) {
