@@ -1,6 +1,7 @@
 import fs from "fs";
 import Prompt from "prompt-sync";
 
+const prompt = Prompt();
 
 export class Livro {
   private _titulo: string;
@@ -39,8 +40,8 @@ export class Livro {
   }
 
   public atualizar(): void{
-    let key = Prompt();
-    let ISBN = key("Digite o ISBN do livro que deseja atualizar: ");
+
+    let ISBN = prompt("Digite o ISBN do livro que deseja atualizar: ");
 
 
     if (fs.existsSync("./data/livros.json")) {
@@ -49,10 +50,10 @@ export class Livro {
       let livro = livros.find((livro: any) => livro.ISBN == ISBN);
 
       if(livro){
-        let titulo = key("Título: ");
-        let autor = key("Autor: ");
-        let ISBN = key("ISBN: ");
-        let ano = key("Ano: ");
+        let titulo = prompt("Título: ");
+        let autor = prompt("Autor: ");
+        let ISBN = prompt("ISBN: ");
+        let ano = prompt("Ano: ");
 
         livro.titulo = titulo;
         livro.autor = autor;
@@ -80,8 +81,8 @@ export class Livro {
 
   public deletar(): void {
     if (fs.existsSync("./data/livros.json")){
-      let key = Prompt();
-      let ISBN = key("Digite o ISBN do livro que deseja deletar: ");
+      
+      let ISBN = prompt("Digite o ISBN do livro que deseja deletar: ");
       const data = fs.readFileSync("./data/livros.json", "utf-8");
       let livros = JSON.parse(data);
       let livro = livros.find((livro: any) => livro.ISBN == ISBN);
