@@ -1,8 +1,14 @@
 [
   {
-    "titulo": "Berserk",
-    "autor": "Miura",
+    "titulo": "berserk",
+    "autor": "miura",
     "ISBN": "666",
     "ano": 1998
+  },
+  {
+    "titulo": "draogn ball",
+    "autor": "toriyama",
+    "ISBN": "777",
+    "ano": 1990
   }
 ]

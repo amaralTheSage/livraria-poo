@@ -1,8 +1,14 @@
 [
   {
-    "nome": "Joao",
-    "endereco": "caralho",
-    "CPF": "02289592099",
-    "telefone": "51998031941"
+    "nome": "joao",
+    "endereco": "praca",
+    "cpf": "1",
+    "telefone": "51"
+  },
+  {
+    "nome": "felipe",
+    "endereco": "coxilha",
+    "cpf": "2",
+    "telefone": "52"
   }
 ]

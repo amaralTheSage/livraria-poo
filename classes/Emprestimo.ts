@@ -31,8 +31,9 @@ export class Emprestimo {
     const membros = Emprestimo.carregarDados("./data/membros.json");
     const livros = Emprestimo.carregarDados("./data/livros.json");
 
-    const membroExiste = membros.some((membro: any) => membro._cpf === this._membro.cpf);
-    const livroExiste = livros.some((livro: any) => livro._isbn === this._livro.isbn);
+    const membroExiste = membros.some((membro: Membro) => membro.cpf == this._membro.cpf);
+    const livroExiste = livros.some((livro: Livro) => livro.ISBN == this._livro.ISBN);
+
 
     if (!membroExiste) {
       console.log("Membro não encontrado!");
@@ -46,7 +47,7 @@ export class Emprestimo {
 
     const emprestimoData = {
       cpfMembro: this._membro.cpf,
-      ISBN_livro: this._livro.isbn,
+      ISBN_livro: this._livro.ISBN,
       dataEmprestimo: this._dataEmprestimo,
       dataDevolucao: this._dataDevolucao,
     };

@@ -1,6 +1,5 @@
 import Prompt from "prompt-sync";
 import { Membro } from "./classes/Membro";
-import fs from "fs";
 import { Livro } from "./classes/Livro";
 import { Emprestimo } from "./classes/Emprestimo";
 

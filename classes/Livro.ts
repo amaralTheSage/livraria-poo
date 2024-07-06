@@ -16,7 +16,7 @@ export class Livro {
     this._ano = ano;
   }
 
-  get isbn(): string {
+  get ISBN(): string {
     return this._ISBN;
   }
 

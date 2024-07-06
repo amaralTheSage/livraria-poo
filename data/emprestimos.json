@@ -1,3 +1,8 @@
 [
-  
+  {
+    "cpfMembro": "1",
+    "ISBN_livro": "666",
+    "dataEmprestimo": "10",
+    "dataDevolucao": "20"
+  }
 ]
