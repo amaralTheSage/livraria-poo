@@ -7,7 +7,7 @@ import Prompt from "prompt-sync";
 jest.mock("fs");
 jest.mock("prompt-sync");
 
-const prompt = Prompt();
+const prompt = (Prompt() as unknown) as jest.Mock;
 
 describe("Emprestimo", () => {
     const membro = new Membro('João', 'Rua A', '123.456.789-00', '9999-9999');
@@ -26,7 +26,7 @@ describe("Emprestimo", () => {
 
     test("Deve adicionar um empréstimo", () => {
         emprestimo.adicionar();
-        
+        console.table(emprestimo)
         expect(fs.writeFileSync).toHaveBeenCalledWith(
             './data/emprestimos.json',
             JSON.stringify([{cpfMembro: membro.cpf, ISBN_livro: livro.ISBN, dataEmprestimo, dataDevolucao}], null, 2)
@@ -46,4 +46,20 @@ describe("Emprestimo", () => {
           }]);
         
     });
+
+    test("Deve realizar devolção e excluir empréstimo", () => {
+        prompt.mockImplementationOnce(() => membro.cpf);
+        prompt.mockImplementationOnce(() => livro.ISBN);
+        (fs.readFileSync as jest.Mock).mockReturnValueOnce(JSON.stringify([{
+            cpfMembro: membro.cpf, ISBN_livro: livro.ISBN, dataEmprestimo, dataDevolucao
+        }]));
+
+        const emprestimos = [{cpfMembro: membro.cpf, ISBN_livro: livro.ISBN, dataEmprestimo, dataDevolucao}];
+        emprestimo.devolver();
+
+        expect(emprestimos).not.toContainEqual({
+            cpfMembro: membro.cpf, ISBN_livro: livro.ISBN, dataEmprestimo, dataDevolucao
+        });
+    });
+
 });
