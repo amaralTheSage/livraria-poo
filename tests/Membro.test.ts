@@ -1,11 +1,10 @@
 import { Membro } from "../classes/Membro";
-import fs from "fs";
-import Prompt from "prompt-sync";
+import fs from "fs";;
 
 jest.mock("fs");
-jest.mock("prompt-sync");
 
-const prompt = (Prompt() as unknown) as jest.Mock;
+const mockInput = jest.fn();
+jest.mock("prompt-sync", () => () => mockInput)
 
 describe("Membro", () => {
   const nome = 'João';
@@ -45,7 +44,7 @@ describe("Membro", () => {
   });
 
   test("Deve atualizar um membro", () => {
-    prompt.mockImplementationOnce(() => cpf);
+    mockInput.mockImplementationOnce(() => cpf);
     (fs.readFileSync as jest.Mock).mockReturnValueOnce(JSON.stringify([{
       nome, endereco, cpf, telefone
     }]));
@@ -55,11 +54,10 @@ describe("Membro", () => {
     const novoCpf = '987.654.321-00';
     const novoTelefone = '8888-8888';
 
-    prompt
-      .mockImplementationOnce(() => novoNome)
-      .mockImplementationOnce(() => novoEndereco)
-      .mockImplementationOnce(() => novoCpf)
-      .mockImplementationOnce(() => novoTelefone);
+    mockInput.mockImplementationOnce(() => novoNome)
+    mockInput.mockImplementationOnce(() => novoEndereco)
+    mockInput.mockImplementationOnce(() => novoCpf)
+    mockInput.mockImplementationOnce(() => novoTelefone);
 
     membro.atualizar();
 
@@ -75,7 +73,7 @@ describe("Membro", () => {
   });
 
   test("Deve remover um membro", () => {
-    prompt.mockImplementationOnce(() => cpf);
+    mockInput.mockImplementationOnce(() => cpf);
     (fs.readFileSync as jest.Mock).mockReturnValueOnce(JSON.stringify([{
       nome, endereco, cpf, telefone
     }]));

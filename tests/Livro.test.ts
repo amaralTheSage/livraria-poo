@@ -1,11 +1,10 @@
 import { Livro } from "../classes/Livro";
 import fs from "fs";
-import Prompt from "prompt-sync";
 
 jest.mock("fs");
-jest.mock("prompt-sync");
 
-const prompt = (Prompt() as unknown) as jest.Mock;
+const mockInput = jest.fn();
+jest.mock("prompt-sync", () => () => mockInput)
 
 describe("Livro", () => {
     const titulo = 'Livro 1';
@@ -46,7 +45,7 @@ describe("Livro", () => {
     });
 
     test("Deve atualizar um livro", () => {
-        prompt.mockImplementationOnce(() => ISBN);
+        mockInput.mockImplementationOnce(() => ISBN);
         (fs.readFileSync as jest.Mock).mockReturnValueOnce(JSON.stringify([{
             titulo, autor, ISBN, ano
         }]));
@@ -56,10 +55,10 @@ describe("Livro", () => {
         const novoISBN = '456';
         const novoAno = 2022;
 
-        prompt.mockImplementationOnce(() => novoTitulo)
-        prompt.mockImplementationOnce(() => novoAutor)
-        prompt.mockImplementationOnce(() => novoISBN)
-        prompt.mockImplementationOnce(() => novoAno);
+        mockInput.mockImplementationOnce(() => novoTitulo)
+        mockInput.mockImplementationOnce(() => novoAutor)
+        mockInput.mockImplementationOnce(() => novoISBN)
+        mockInput.mockImplementationOnce(() => novoAno);
 
         livro.atualizar();
 
@@ -70,7 +69,7 @@ describe("Livro", () => {
     });
 
     test("Deve excluir um livro", () => {
-        prompt.mockImplementationOnce(() => ISBN);
+        mockInput.mockImplementationOnce(() => ISBN);
         (fs.readFileSync as jest.Mock).mockReturnValueOnce(JSON.stringify([{
             titulo, autor, ISBN, ano
         }]));

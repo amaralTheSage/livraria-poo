@@ -2,12 +2,11 @@ import { Emprestimo } from "../classes/Emprestimo";
 import { Membro } from "../classes/Membro";
 import { Livro } from "../classes/Livro";
 import fs from "fs";
-import Prompt from "prompt-sync";
 
 jest.mock("fs");
-jest.mock("prompt-sync");
 
-const prompt = (Prompt() as unknown) as jest.Mock;
+const mockInput = jest.fn();
+jest.mock("prompt-sync", () => () => mockInput)
 
 describe("Emprestimo", () => {
     const membro = new Membro('João', 'Rua A', '123.456.789-00', '9999-9999');
@@ -48,8 +47,8 @@ describe("Emprestimo", () => {
     });
 
     test("Deve realizar devolção e excluir empréstimo", () => {
-        prompt.mockImplementationOnce(() => membro.cpf);
-        prompt.mockImplementationOnce(() => livro.ISBN);
+        mockInput.mockImplementationOnce(() => membro.cpf);
+        mockInput.mockImplementationOnce(() => livro.ISBN);
         (fs.readFileSync as jest.Mock).mockReturnValueOnce(JSON.stringify([{
             cpfMembro: membro.cpf, ISBN_livro: livro.ISBN, dataEmprestimo, dataDevolucao
         }]));
