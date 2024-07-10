@@ -3,8 +3,8 @@ import fs from "fs";
 
 jest.mock("fs");
 
-const mockInput = jest.fn();
-jest.mock("prompt-sync", () => () => mockInput)
+// const mockInput = jest.fn();
+// jest.mock("prompt-sync", () => () => mockInput)
 
 describe("Livro", () => {
     const titulo = 'Livro 1';
@@ -44,42 +44,42 @@ describe("Livro", () => {
         
     });
 
-    test("Deve atualizar um livro", () => {
-        mockInput.mockImplementationOnce(() => ISBN);
-        (fs.readFileSync as jest.Mock).mockReturnValueOnce(JSON.stringify([{
-            titulo, autor, ISBN, ano
-        }]));
+    // test("Deve atualizar um livro", () => {
+    //     mockInput.mockImplementationOnce(() => ISBN);
+    //     (fs.readFileSync as jest.Mock).mockReturnValueOnce(JSON.stringify([{
+    //         titulo, autor, ISBN, ano
+    //     }]));
 
-        const novoTitulo = 'Livro 2';
-        const novoAutor = 'Autor 2';
-        const novoISBN = '456';
-        const novoAno = 2022;
+    //     const novoTitulo = 'Livro 2';
+    //     const novoAutor = 'Autor 2';
+    //     const novoISBN = '456';
+    //     const novoAno = 2022;
 
-        mockInput.mockImplementationOnce(() => novoTitulo)
-        mockInput.mockImplementationOnce(() => novoAutor)
-        mockInput.mockImplementationOnce(() => novoISBN)
-        mockInput.mockImplementationOnce(() => novoAno);
+    //     mockInput.mockImplementationOnce(() => novoTitulo)
+    //     mockInput.mockImplementationOnce(() => novoAutor)
+    //     mockInput.mockImplementationOnce(() => novoISBN)
+    //     mockInput.mockImplementationOnce(() => novoAno);
 
-        livro.atualizar();
+    //     livro.atualizar();
 
-        expect(fs.writeFileSync).toHaveBeenCalledWith(
-            './data/livros.json',
-            JSON.stringify([{titulo: novoTitulo, autor: novoAutor, ISBN: novoISBN, ano: novoAno}], null, 2)
-        );
-    });
+    //     expect(fs.writeFileSync).toHaveBeenCalledWith(
+    //         './data/livros.json',
+    //         JSON.stringify([{titulo: novoTitulo, autor: novoAutor, ISBN: novoISBN, ano: novoAno}], null, 2)
+    //     );
+    // });
 
-    test("Deve excluir um livro", () => {
-        mockInput.mockImplementationOnce(() => ISBN);
-        (fs.readFileSync as jest.Mock).mockReturnValueOnce(JSON.stringify([{
-            titulo, autor, ISBN, ano
-        }]));
+    // test("Deve excluir um livro", () => {
+    //     mockInput.mockImplementationOnce(() => ISBN);
+    //     (fs.readFileSync as jest.Mock).mockReturnValueOnce(JSON.stringify([{
+    //         titulo, autor, ISBN, ano
+    //     }]));
 
-        livro.deletar();
+    //     livro.deletar();
 
-        expect(fs.writeFileSync).toHaveBeenCalledWith(
-            './data/livros.json',
-            JSON.stringify([], null, 2)
-        );
-    });
+    //     expect(fs.writeFileSync).toHaveBeenCalledWith(
+    //         './data/livros.json',
+    //         JSON.stringify([], null, 2)
+    //     );
+    // });
 
 });

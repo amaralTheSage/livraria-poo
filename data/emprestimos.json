@@ -4,5 +4,17 @@
     "ISBN_livro": "666",
     "dataEmprestimo": "10",
     "dataDevolucao": "20"
+  },
+  {
+    "cpfMembro": "1",
+    "ISBN_livro": "777",
+    "dataEmprestimo": "10",
+    "dataDevolucao": "20"
+  },
+  {
+    "cpfMembro": "1",
+    "ISBN_livro": "666",
+    "dataEmprestimo": "20/10/13",
+    "dataDevolucao": "30/10/13"
   }
 ]
